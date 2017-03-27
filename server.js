@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static(__dirname + '/static'))
 app.set('view engine', 'ejs')
 
-var port = parseInt(process.argv[2], 10) || 80;
+var port = parseInt(process.argv[2], 10) || 3000;
 
 mongoClient.connect('mongodb://abhishek:abhishek@ds143000.mlab.com:43000/go-links', (err, database) => {
   if (err) return console.log(err)
