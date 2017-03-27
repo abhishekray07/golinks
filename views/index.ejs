@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link type="text/css" rel="stylesheet" href="view.css">
+  <title>Go links</title>
+</head>
+<body>
+  <table class="links">
+    <thead>
+      <tr>
+        <th>Shortcut</th>
+        <th>Link</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i<links.length; i++) {%>
+        <tr>
+          <td class="shortcut">
+            <span><%= links[i].shortcut %></span>
+          </td>
+          <td class="link">
+            <span><%= links[i].link %></span>
+          </td>
+          <td>
+            <form action="/delete" method="POST">
+              <input type="hidden" name="shortcut" value="<%= links[i].shortcut %>">
+              <button>Delete</button>
+            </form>
+          </td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <hr>
+  <form action="/links" method="POST" class="add-link">
+    <fieldset class="header">
+      <label for="header">
+        Add a new link
+      </label>
+    </fieldset>
+    <fieldset class="link-info">
+      <label for="link">
+        Link
+        <input type="text" name="link" size="100">
+      </label>
+      <label for="shortcut">
+        Shortcut
+        <input type="text" name="shortcut">
+      </label>
+    </fieldset>
+    <fieldset class="button">
+      <button type="submit">Submit</button>
+    </fieldset>
+  </form>
+</body>
+</html>
