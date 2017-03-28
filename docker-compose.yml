@@ -2,15 +2,18 @@ version: "2"
 services:
   nginx:
     build: ./nginx
+    image: abhishekray07/nginx
     ports:
       - "80:80"
   web1:
     build: ./web
+    image: abhishekray07/web
     command: npm start
     ports:
       - 3000
   web2:
     build: ./web
+    image: abhishekray07/web
     command: npm start
     ports:
       - 3000
