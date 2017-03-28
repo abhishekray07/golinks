@@ -1,0 +1,120 @@
+*,
+*:before,
+*:after {
+   box-sizing: border-box;
+}
+
+body {
+  background: #f0f0f0;
+}
+
+.add-link {
+  border: 1px solid #c6c7cc;
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  width: 300px;
+  margin: auto;
+}
+
+input {
+  border-radius: 5px;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.link-info {
+  padding: 20px 20px 0 20px;
+}
+
+.link-info label {
+  color: #395870;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.link-info input {
+  background: #fff;
+  border: 1px solid #c6c7cc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: #636466;
+  padding: 6px;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.button {
+  background: #ddd;
+  border-top: 1px solid #c6c7cc;
+  padding: 20px;
+}
+
+.button button {
+  background: linear-gradient(#49708f, #293f50);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  float: left;
+  padding: 8px 16px;
+}
+
+.header {
+  background: #ddd;
+  border-bottom: 1px solid #c6c7cc;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+.header label {
+  color: #395870;
+  display: block;
+  font-weight: bold;
+  padding-left: 20px;
+}
+
+.links {
+  border: solid 1px #DDEEEE;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: auto;
+  font: normal 13px Arial, sans-serif;
+  width: 300px;
+}
+
+.links thead th {
+  background: linear-gradient(#49708f, #293f50);
+  border: solid 1px #DDEEEE;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.links tbody td {
+  background: #dedede;
+  border: solid 1px #DDEEEE;
+  color: #395870;
+  padding: 10px;
+  text-align: center;
+  font: 14px/1.4 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.links .shortcut {
+  font-weight: bold;
+}
+
+.links button {
+  background: rgb(202, 60, 60);
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 5px;
+}

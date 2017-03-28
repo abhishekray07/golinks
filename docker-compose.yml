@@ -1,0 +1,16 @@
+version: "2"
+services:
+  nginx:
+    image: abhishekray07/nginx
+    ports:
+      - "80:80"
+  web1:
+    image: abhishekray07/web
+    command: npm start
+    ports:
+      - 3000
+  web2:
+    image: abhishekray07/web
+    command: npm start
+    ports:
+      - 3000
