@@ -6,6 +6,7 @@ dependencies:
   override:
     - docker info
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - sudo apt-get install python-dev
     - sudo pip install --upgrade docker-compose
 
 test:
