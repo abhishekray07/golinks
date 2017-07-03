@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+  <table class="table table-hover table-striped">
+  <thead>
+  <tr>
+    <th>Shortcut</th>
+    <th>Link</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for link in links %}
+    <tr>
+      <td>{{ link.shortcut }}</td>
+      <td><a href="{{ link.redirect }}">{{ link.redirect }}</a></td>
+      <td><a class="btn btn-default" href="#" role="button">Edit</a></td>
+      <td><a class="btn btn-default" href="#" role="button">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}
