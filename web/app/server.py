@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
-import pickle
-import os
+from tinydb import TinyDB, Query
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+
+golinks_json = 'golinks.json'
+golinks_db = TinyDB(golinks_json)
 
 ########
 # Routes
@@ -15,61 +18,67 @@ def index():
 
 @app.route('/create')
 def create():
-    return _create()
+    return render_template('create.html',
+                           title='Create a new link',
+                           shortcut=None,
+                           redirect_url=None)
 
 @app.route('/add', methods=['POST'])
 def add():
     add_link(request.form['shortcut'], request.form['redirect'])
     return redirect(url_for('index'))
 
+@app.route('/delete/<shortcut>/')
+def delete(shortcut):
+    delete_link(shortcut)
+    return redirect(url_for('index'))
+
+@app.route('/edit/<shortcut>/')
+def edit(shortcut):
+    link_query = Query()
+    link = golinks_db.search(link_query.shortcut == shortcut)[0]
+    return render_template('create.html',
+                           title='Edit Link',
+                           shortcut=link['shortcut'],
+                           redirect_url=link['redirect'])
+
 @app.route('/<path:path>')
 def catch_all(path):
-    for link in links:
-        if link['shortcut'] == path:
-            return redirect(link['redirect'])
+    link_query = Query()
+    redirect_url = golinks_db.search(link_query.shortcut == path)
 
-    return _create(shortcut=path)
+    if redirect_url:
+        return redirect(redirect_url[0]['redirect'])
+
+    return render_template('create.html',
+                           title='Create a new link',
+                           shortcut=path,
+                           redirect_url=None)
 
 ###########
 # Helpers
 ###########
 
 def _index():
+    links = golinks_db.all()
     return render_template('index.html',
                            title='Home',
                            links=links)
-
-def _create(shortcut=None, redirect_url=None):
-    return render_template('create.html',
-                           title='Create a new link',
-                           shortcut=shortcut,
-                           redirect_url=redirect_url)
 
 #########
 # Storage
 #########
 
-LINKS_FILE = 'golinks'
-
-def read_links():
-    if not os.path.exists(LINKS_FILE):
-        return []
-
-    with open(LINKS_FILE, 'r') as f:
-        return pickle.load(f)
-
-links = read_links()
-
-def write_links(links):
-    with open(LINKS_FILE, 'a+') as f:
-        pickle.dump(links, f)
-
 def add_link(shortcut, redirect_url):
-    global links
-    links.append(
-        {
-            'shortcut': shortcut,
-            'redirect': redirect_url
-        }
-    )
-    write_links(links)
+    link_query = Query()
+    link = golinks_db.search(link_query.shortcut == shortcut)
+
+    if link:
+        golinks_db.update({'shortcut': shortcut, 'redirect': redirect_url},
+                          link_query.shortcut == shortcut)
+    else:
+        golinks_db.insert({'shortcut': shortcut, 'redirect': redirect_url})
+
+def delete_link(shortcut):
+    link_query = Query()
+    golinks_db.remove(link_query.shortcut == shortcut)

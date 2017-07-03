@@ -14,8 +14,8 @@
     <tr>
       <td>{{ link.shortcut }}</td>
       <td><a href="{{ link.redirect }}">{{ link.redirect }}</a></td>
-      <td><a class="btn btn-default" href="#" role="button">Edit</a></td>
-      <td><a class="btn btn-default" href="#" role="button">Delete</a></td>
+      <td><a href="/edit/{{ link.shortcut }}" class="btn btn-default" role="button">Edit</a></td>
+      <td><a href="/delete/{{ link.shortcut }}" class="btn btn-default" role="button">Delete</a></td>
     </tr>
   {% endfor %}
   </tbody>

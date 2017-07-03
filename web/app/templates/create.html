@@ -11,7 +11,11 @@
   </div>
   <div class="form-group">
     <label for="redirect">Redirect Link</label>
-    <input type="text" class="form-control" name="redirect" placeholder="Redirect Link" required>
+    {% if redirect_url %}
+      <input type="text" class="form-control" name="redirect" value="{{ redirect_url }}" required>
+    {% else %}
+      <input type="text" class="form-control" name="redirect" placeholder="Redirect Link" required>
+    {% endif %}
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
