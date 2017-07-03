@@ -12,5 +12,6 @@ services:
   web:
     restart: always
     build: ./web
+    image: abhishekray07/web
     expose:
       - "5050"
