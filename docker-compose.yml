@@ -1,19 +1,16 @@
 version: "2"
 services:
   nginx:
+    restart: always
     build: ./nginx
     image: abhishekray07/nginx
     ports:
       - "80:80"
-  web1:
+    depends_on:
+      - web
+
+  web:
+    restart: always
     build: ./web
-    image: abhishekray07/web
-    command: npm start
-    ports:
-      - 3000
-  web2:
-    build: ./web
-    image: abhishekray07/web
-    command: npm start
-    ports:
-      - 3000
+    expose:
+      - "5050"

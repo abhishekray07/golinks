@@ -1,15 +1,11 @@
-FROM node:boron
+FROM ubuntu:16.04
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev
 
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
-
-# Bundle app source
-COPY . /usr/src/app
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+# We copy just the requirements.txt first to leverage Docker cache
+COPY ./ /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+ENTRYPOINT [ "python" ]
+CMD [ "run.py" ]
